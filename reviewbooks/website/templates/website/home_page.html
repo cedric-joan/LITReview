@@ -1,0 +1,9 @@
+{% extends 'base.html'%}{% block content %}
+
+<title>Page d'accueil</title>
+<li><a href="{% url 'logout' %}">Se Déconnecter</a></li>
+
+<h1>FLUX</h1>
+<p>Salut {{ user.username }}! Vous êtes connecté.</p>
+
+{% endblock  %}
