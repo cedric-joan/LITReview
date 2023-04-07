@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+ {% block content %}
 
 <p>{{ message }}</p>
 <form action="" method="post">
@@ -6,5 +6,8 @@
   {% csrf_token %}
   <button type="submit">Se connecter</button>
 </form>
+
+<p>Pas encore membre ?</p>
+<li><a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></li>
 
 {% endblock content %}

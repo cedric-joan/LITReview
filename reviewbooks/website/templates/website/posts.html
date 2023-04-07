@@ -1,0 +1,15 @@
+{% extends 'base.html'%} {% block title %}
+<title>Posts</title>
+{% endblock %} {% block content %}
+
+<p>{{ user.username }} a publié une critique</p>
+<div class="grid-container">
+    {% for ticket in tickets %}
+    <div class="post">
+        <h3>{{ ticket.title }}</h3>
+        <p> {{ ticket.description }}</p>
+        <img src="{{ photo.image.url }}"/>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

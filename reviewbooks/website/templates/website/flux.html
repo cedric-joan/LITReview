@@ -1,0 +1,23 @@
+{% extends 'base.html'%}{% block content %}
+
+<title>Page d'accueil</title>
+
+<h2>Ticket</h2>
+<p>Salut {{ user.username }}! Vous êtes connecté.</p>
+<div class="grid-container">
+  {% for ticket in tickets %}
+  <div class="post">
+    <a href="{% url 'view_ticket' ticket.id %}">
+      <p>{{ ticket.date_created }}</p>
+      <h3>{{ ticket.title }}</h3>
+      <p>{{ ticket.description }}</p>
+      {% if ticket.image %}
+      <img src="{{ ticket.image.url }}" />
+      {% else %}
+      <p>Aucune image</p>
+      {% endif%}
+      </a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
