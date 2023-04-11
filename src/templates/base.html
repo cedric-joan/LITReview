@@ -1,0 +1,14 @@
+{% load static %}
+<html lang="fr">
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>LITReview</title>
+  </head>
+  <body>
+    <h1>NavBar</h1>
+    <li><a href="{% url 'flux-page' %}">Flux</a></li>
+    <li><a href="{% url 'create_ticket' %}">Créer un ticket</a></li>
+    <li><a href="{% url 'logout' %}">Se Déconnecter</a></li>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
