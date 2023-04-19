@@ -1,0 +1,22 @@
+{% extends 'base.html'%}{% block content %}
+
+<h2>Ticket</h2>
+
+<div class="grid-container">
+  <div class="tickets">
+    <div class="header-ticket">
+      <p>{{ ticket.author|upper }} a demandé une critique.</p>
+      <p>Le {{ ticket.date_created }}</p>
+    </div>
+    <h3>{{ ticket.title }}</h3>
+    <p>{{ ticket.description }}</p>
+    {% if ticket.image %}
+    <img src="{{ ticket.image.url }}" />
+    {% else %}
+    <p>Aucune image</p>
+    {% endif %} {% if request.user == ticket.author %}
+    <p><a href="{% url 'update_ticket' ticket.id %}">Modifier le ticket</a></p>
+    {% endif %}
+  </div>
+  {% endblock content %}
+</div>

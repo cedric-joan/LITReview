@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+h1 {
+  margin-top: 30px;
+  margin-left: 55rem;
+  color: white;
+}
+ h2 {
+  text-align: center;
+}
+h3 {
+  padding: 20px;
+}
+li {
+  list-style-type: none;
+}
+.mx-3{
+  position: sticky;
+  top: 12%;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 1px black;
+  position: sticky;
+  top: 0;
+  background-color: black;
+}
+header a {
+  padding: 40px 25px;
+  color: white;
+}
+header a:hover {
+ color: cornflowerblue;
+  
+}
+.nav-bar {
+  display: flex;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.grid-container {
+  margin: auto;
+  border: solid 1px red;
+  width: 30vw;
+}
+button{
+  border-color: transparent;
+  box-shadow: 0 0 8px grey
+}
+.btn-head{
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+}
+.tickets{
+  border: solid 1px black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.header-ticket{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+img{
+  width: 70%;
+  height: 30%;
+  border-radius: 20px 20px 20px 20px;
+  padding: 1.5%;
+  object-fit: cover;
+}
+.btn-critique{
+  display: block;
+  margin-left: auto;
+  background-color: rgb(237, 187, 100);
+}
+.btn{
+  border-radius: 20px 20px 20px 20px;
+  padding: 1.5%;
+  margin-bottom: 10px;
+}
+.btn:hover{
+  background-color: cornflowerblue;
+
+}
+.stars{
+  display: block;
+  align-items: center;
+}
