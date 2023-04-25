@@ -16,6 +16,10 @@ urlpatterns = [
     path('view_ticket/<int:ticket_id>/', website.views.view_ticket, name='view_ticket'),
     path('update_ticket/<int:ticket_id>/update/', website.views.update_ticket, name='update_ticket'),
     path('create_review/add/', website.views.create_review, name='create_review'),
+    path('create_review_from_ticket/<int:ticket_id>/', website.views.create_review_from_ticket, name='create_review_from_ticket'),
+    path('update_review/<int:review_id>/', website.views.update_review, name='update_review'),
+    path('follow_users/', website.views.follow_users, name='follow_users'),
+    path('delete_follow_users/<int:user_id>/', website.views.delete_follow_users, name='delete_follow_users'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
