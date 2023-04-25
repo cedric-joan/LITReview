@@ -1,13 +1,18 @@
- {% block content %}
-
-<p>{{ message }}</p>
-<form action="" method="post">
-  {{ form.as_p }} 
-  {% csrf_token %}
-  <button type="submit">Se connecter</button>
-</form>
-
-<p>Pas encore membre ?</p>
-<li><a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></li>
-
+{% extends 'base.html'%} {% load static %} {% block content %}
+<h2>Connectez-vous</h2>
+<div class="container-auth">
+  <p>{{ message }}</p>
+  <form action="" method="post">
+    <p class="username">Nomd'utilisateur :{{ form.username }}</p>
+    <p class="password">Mot de passe :{{ form.password }}</p>
+    {% csrf_token %}
+    <button type="submit" class="btn">Se connecter</button>
+  </form>
+  <div class="subscribe">
+    <p>Pas encore membre ?</p>
+    <button type="submit" class="btn" href="{% url 'signup' %}">
+      Inscrivez-vous maintenant !
+    </button>
+  </div>
+</div>
 {% endblock content %}
