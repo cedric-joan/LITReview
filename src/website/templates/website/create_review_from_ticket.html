@@ -1,0 +1,25 @@
+{% extends 'base.html'%} {% block title %}
+
+<title>Review</title>
+{% endblock %} {% block content %}
+<h2>Créer une critique en réponse au ticket</h2>
+<div class="grid-container">
+  <div class="tickets">
+    <div class="header-ticket">
+      <p>{{ ticket.author|upper }} a demandé une critique.</p>
+      <p>Le {{ ticket.date_created }}</p>
+    </div>
+    <p>{{ ticket.title }}</p>
+    <p>{{ ticket.description }}</p>
+    {% if ticket.image %}
+    <img src="{{ ticket.image.url }}" />
+    {% endif %}
+    <hr />
+    <h3>Critique</h3>
+    <form method="post" enctype="multipart/form-data">
+      {{ review_form.as_p }} {% csrf_token %}
+      <button type="submit">Envoyer</button>
+    </form>
+  </div>
+  {% endblock content%}
+</div>

@@ -1,24 +1,40 @@
-{% extends 'base.html'%}{% block content %}
-
+{% extends 'base.html'%} {% load flux_extras %} 
+{% load static %}
+{% block content %} 
 <title>Page d'accueil</title>
 
-<h2>Ticket</h2>
-<p>Salut {{ user.username }}! Vous êtes connecté.</p>
-<h3><a href="{% url 'create_review' %}">Créer une critique</a></h3>
+<h2>Flux</h2>
 <div class="grid-container">
-  {% for ticket in tickets %}
-  <div class="post">
-    <a href="{% url 'view_ticket' ticket.id %}">
-      <p>{{ ticket.date_created }}</p>
-      <h3>{{ ticket.title }}</h3>
-      <p>{{ ticket.description }}</p>
-      {% if ticket.image %}
-      <img src="{{ ticket.image.url }}" />
-      {% else %}
-      <p>Aucune image</p>
-      {% endif%}
-      </a>
+  <div class="btn-head">
+    <button class="btn">
+      <a href="{% url 'create_ticket' %}">Demander une critique</a>
+    </button>
+    <button class="btn">
+      <a href="{% url 'create_review' %}">Créer une critique</a>
+    </button>
   </div>
+  {% for instance in page_obj %} 
+    {% if instance|model_type == 'Ticket' %}
+      {% include 'website/partials/ticket_snippet.html' with ticket=instance %}
+    {% elif instance|model_type == 'Review' %} 
+      {% include 'website/partials/review_snippet.html' with review=instance %}
+    {% endif %} 
   {% endfor %}
 </div>
+<span class="paginator">
+  {% if page_obj.has_previous %}
+      <a href="?page=1">« première</a> |
+      <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+  {% endif %}
+
+  <span>
+      Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
+
+  </span>
+  {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">suivante</a> |
+
+      <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
+  {% endif %}
+</span>
 {% endblock content %}

@@ -1,3 +1,151 @@
 * {
-  background-color: rgb(239, 245, 242);
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
+a {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+h1 {
+  margin-top: 30px;
+  margin-left: 55rem;
+  color: white;
+}
+h2 {
+  text-align: center;
+  padding: 10px;
+}
+h3 {
+  padding: 20px;
+}
+li {
+  list-style-type: none;
+}
+.mx-3 {
+  position: sticky;
+  top: 12%;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background-color: black;
+}
+header a {
+  padding: 40px 25px;
+  color: white;
+}
+header a:hover {
+  color: cornflowerblue;
+}
+.nav-bar {
+  display: flex;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.grid-container {
+  margin: auto;
+  border: solid 1px red;
+  width: 30vw;
+}
+.container-auth {
+  margin-top: 10px;
+  margin:auto;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  border: solid 1px black;
+  width: 30vw;
+  gap: 10%;
+  margin-bottom: 510px;
+  border-radius: 20px 20px 20px 20px;
+
+}
+.user-follows {
+  border: solid 1px black;
+  align-items: center;
+  display: flex;
+
+    padding: 5px;
+  margin-top: 5px;
+  gap: 30%;
+}
+select {
+  width: 16vw;
+  height: 30px;
+  margin-bottom: 15px;
+}
+button {
+  border-color: transparent;
+  box-shadow: 0 0 8px grey;
+}
+.btn-head {
+  display: flex;
+  padding: 20px;
+  justify-content: space-around;
+}
+.tickets {
+  border: solid 1px black;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.header-ticket {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  justify-content: space-between;
+}
+img {
+  width: 70%;
+  height: 30%;
+  border-radius: 20px 20px 20px 20px;
+  padding: 1.5%;
+  object-fit: cover;
+}
+.btn-critique {
+  display: block;
+  margin-left: auto;
+  background-color: rgb(237, 187, 100);
+}
+.btn-follow {
+  border-radius: 20px 20px 20px 20px;
+  padding: 4%;
+  margin-left: 140px;
+}
+.btn-follow:hover {
+  background-color: rgb(237, 187, 100);
+  cursor: pointer;
+}
+.btn {
+  border-radius: 20px 20px 20px 20px;
+  padding: 1.5%;
+  margin-bottom: 10px;
+}
+.btn:hover {
+  background-color: cornflowerblue;
+  cursor: pointer;
+}
+.stars {
+  display: block;
+  align-items: center;
+}
+span {
+  display: block;
+  text-align: center;
+  padding: 1%;
+}
+p {
+  padding: 5px;
+}
+.subscribe {
+  border: solid 1px black;
+  border-radius: 20px 20px 20px 20px;
+  margin-left: 60%;
+  padding: 2%;
+  justify-content: center;
+}
+

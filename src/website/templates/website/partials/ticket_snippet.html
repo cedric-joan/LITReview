@@ -1,0 +1,25 @@
+{% load flux_extras %}
+
+<div class="tickets">
+  <a href="{% url 'view_ticket' ticket.id %}">
+    <div class="header-ticket">
+      <p>
+        {% get_poster_display ticket.author|upper %} a demandé une critique.
+      </p>
+      <p>Le {{ ticket.date_created }}</p>
+    </div>
+    <h4>{{ ticket.title }}</h4>
+    <p>{{ ticket.description }}</p>
+    {% if ticket.image %}
+    <img src="{{ ticket.image.url }}" />
+    {% else %}
+    <p>Aucune image</p>
+    {% endif %}
+  </a>
+  <p></p>
+  <button class="btn btn-critique">
+    <a href="{% url 'create_review_from_ticket' ticket.id %}"
+      >Créer une critique</a
+    >
+  </button>
+</div>

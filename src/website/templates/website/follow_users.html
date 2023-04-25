@@ -1,0 +1,46 @@
+{% extends 'base.html'%} {% block title %} {% load static %}
+<title>Follow</title>
+{% endblock %} {% block content %}
+<h2>Suivre d'autres utilisateurs</h2>
+<div class="container-auth">
+  <h4>Faites votre choix parmis les utilisateurs</h4>
+  <form method="post" novalidate enctype="multipart/form-data">
+    <select name="to_follow" id="">
+      {% for user_to_follow in users_to_follow %}
+      <option value="{{ user_to_follow.id }}">{{ user_to_follow }}</option>
+      {% endfor %}
+    </select>
+
+    {% csrf_token %}
+    <button type="submit" class="btn">Confirmer</button>
+  </form>
+  <div class="tickets">
+    {% if users_followed %}
+    <h3 class="mt-5">Abonnements</h3>
+    {% for user_followed in users_followed %}
+    <div class="user-follows">
+      <p class="m-2">{{ user_followed.followed_user.username }}</p>
+      <form
+        method="post"
+        action="{% url 'delete_follow_users' user_followed.followed_user.id  %}"
+        onsubmit="return confirm('Voulez vous vraiment supprimer cet abonnement ?')"
+      >
+        {% csrf_token %}
+        <button type="submit" name="to_delete" class="btn-follow">
+          Désabonner
+        </button>
+      </form>
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+  <div class="tickets">
+    {% if users_follow_you %}
+    <h3>Abonnés:</h3>
+    <div class="user-follows">
+      {% for user_follow in users_follow_you %}
+      <p>{{ user_follow }}</p>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content%}

@@ -1,5 +1,4 @@
 from django import forms
-
 from . import models
 
 
@@ -18,7 +17,7 @@ class DeleteForm(forms.Form):
     
     
 class ReviewForm(forms.ModelForm):
-    
+    update_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)
     class Meta:
         model = models.Review
         fields = ['headline', 'rating', 'comment']
@@ -30,11 +29,13 @@ class ReviewForm(forms.ModelForm):
             'body': forms.Textarea(attrs={'class': 'form-control mx-auto w-50 mb-3'})
         }
 
+class DeleteReviewForm(forms.Form):
+    delete_review = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+    
 
-# class FollowUsersForm(forms.ModelForm):
-#     """
-#         Forms to create a subscription
-#     """
-#     class Meta:
-#         model = models.UserFollows
-#         fields = ['followed_user']
+
+class FollowUsersForm(forms.ModelForm):
+    
+    class Meta:
+        model = models.UserFollows
+        fields = ['followed_user']

@@ -4,8 +4,8 @@
 <div class="grid-container">
   <div class="tickets">
     <form method="post" enctype="multipart/form-data">
-      {{ edit_form.as_p }} {% csrf_token %}
-      <button type="submit" class="btn">Sauvegarder</button>
+      {{ review_form.as_p }} {% csrf_token %}
+      <button type="submit">Sauvegarder</button>
     </form>
 
     <hr />
@@ -13,8 +13,8 @@
     <h3>Supprimer le ticket</h3>
     <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
     <form action="" method="post">
-      {{ delete_form }} {% csrf_token %}
-      <button type="submit" class="btn">Supprimer</button>
+      {{ delete_review }} {% csrf_token %}
+      <button type="submit">Supprimer</button>
     </form>
   </div>
 

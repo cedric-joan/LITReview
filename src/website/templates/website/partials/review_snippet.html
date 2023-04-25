@@ -1,0 +1,26 @@
+{% load flux_extras %}
+
+<div class="tickets">
+  <a href="{% url 'update_review' instance.id %}">
+    <div class="header-ticket">
+      <p>{{ instance.author|upper }} a posté une critique.</p>
+      <p>Le {{ instance.date_created }}</p>
+    </div>
+    <h4>{{ instance.title }}</h4>
+    <p>{{ instance.comment }}</p>
+    <div class="stars">
+      {% if instance.rating == 1 %}
+      <i class="fas-stars">⭐</i>
+      {% elif instance.rating == 2 %}
+      <i class="fas-stars">⭐⭐</i>
+      {% elif instance.rating == 3 %}
+      <i class="fas-stars">⭐⭐⭐</i>
+      {% elif instance.rating == 4 %}
+      <i class="fas-stars">⭐⭐⭐⭐</i>
+      {% elif instance.rating == 5 %}
+      <i class="fas-stars">⭐⭐⭐⭐⭐</i>
+      {% endif %}
+    </div>
+  </a>
+  <p></p>
+</div>
