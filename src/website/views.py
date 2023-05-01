@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from website.models import Ticket, Review , UserFollows
 from authentication.models import User
 from itertools import chain
-from django.db.models import Q
+from django.db.models import CharField, Value
 from . import forms
 
 
@@ -16,28 +16,50 @@ def view_ticket(request, ticket_id):
 
 @login_required
 def flux_page(request):
-    tickets = Ticket.objects.all()
-    reviews = Review.objects.all()
 
-    # tickets = Ticket.objects.filter(
-    #     Q(user__in=request.user.follows.all())
-    # )
+    # tickets = Ticket.objects.filter(user__in=request.user.followed_users.all())
+    # reviews = Review.objects.filter()
 
-    # reviews = Review.objects.filter(
-    #     Q(user__in=request.user.follows.all())
-    # )
+    # tickets = Ticket.objects.all()
+    # reviews = Review.objects.all()
+    users_followed = UserFollows.objects.filter(user=request.user)
+    tickets = Ticket.objects.filter(author__in=[user_followed.followed_user for user_followed
+                                in users_followed])
+
+    reviews = Review.objects.filter(author__in=[user_followed.followed_user for user_followed
+                                in users_followed])
 
     tickets_and_reviews = sorted(chain(tickets, reviews),
                                  key=lambda instance: instance.date_created,
                                  reverse=True)
     
-    paginator = Paginator(tickets_and_reviews, 4)
+    paginator = Paginator(tickets_and_reviews, 6)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     context = {'tickets_and_reviews': tickets_and_reviews, 'page_obj': page_obj}
     return render(request, "website/flux.html", context=context)
+
+
+
+
+@login_required
+def display_posts(request):
+    tickets_user = Ticket.objects.filter(author=request.user)
+    tickets_user = tickets_user.annotate(content_type=Value('TICKET', CharField()))
+    reviews_user = Review.objects.filter(author=request.user)
+    reviews_user = reviews_user.annotate(content_type=Value('REVIEW', CharField()))
+    posts = sorted(chain(tickets_user, reviews_user),
+                   key=lambda instance: instance.date_created, reverse=True)
+    
+    paginator = Paginator(posts, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {'posts': posts, 'page_obj': page_obj}
+    return render(request, 'website/posts.html', context=context)
+
 
 @login_required
 def create_ticket(request):
@@ -93,7 +115,6 @@ def update_review(request, review_id):
     return render(request, 'website/update_review.html', context=context)
 
 
-
 @login_required
 def create_review(request):
     review_form = forms.ReviewForm()
@@ -116,9 +137,12 @@ def create_review_from_ticket(request, ticket_id):
     if request.method == "POST":
         review_form = forms.ReviewForm(request.POST)
         if review_form.is_valid():
+            ticket.has_review = True
+            ticket.save()
             review = review_form.save(commit=False)
             review.author = request.user
             review.ticket = Ticket.objects.get(id=ticket_id)
+            review.ticket.has_review = True
             review.save()
             return redirect('flux-page')
     context={"ticket": ticket, "review_form": review_form}
@@ -152,7 +176,6 @@ def delete_follow_users(request, user_id):
     if request.method == "POST":
         user_follow.delete()
         return redirect('follow_users')
-
 
 
 
