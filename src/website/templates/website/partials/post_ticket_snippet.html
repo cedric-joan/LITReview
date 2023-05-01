@@ -13,11 +13,9 @@
   <p>Aucune image</p>
   {% endif %}
   <p></p>
-  {% if ticket.has_review == False %}
+  {% if request.user == ticket.author %}
   <button class="btn btn-critique">
-    <a href="{% url 'create_review_from_ticket' ticket.id %}"
-      >Créer une critique</a
-    >
+    <a href="{% url 'update_ticket' ticket.id %}">Modifier</a>
   </button>
   {% endif %}
 </div>
