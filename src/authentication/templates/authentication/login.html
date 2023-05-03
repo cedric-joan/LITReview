@@ -3,15 +3,15 @@
 <div class="container-auth">
   <p>{{ message }}</p>
   <form action="" method="post">
-    <p class="username">Nomd'utilisateur :{{ form.username }}</p>
+    <p class="username">Nom d'utilisateur :{{ form.username }}</p>
     <p class="password">Mot de passe :{{ form.password }}</p>
     {% csrf_token %}
     <button type="submit" class="btn">Se connecter</button>
   </form>
   <div class="subscribe">
     <p>Pas encore membre ?</p>
-    <button type="submit" class="btn" href="{% url 'signup' %}">
-      Inscrivez-vous maintenant !
+    <button class="btn">
+      <a href="{% url 'signup' %}">Inscrivez-vous maintenant!</a>
     </button>
   </div>
 </div>

@@ -1,15 +1,16 @@
-{% load static %}
-{% block content %}
-
-<li><a href="{% url 'login' %}">Retour à la page de connexion</a></li>
+{% extends 'base.html'%} {% load static %} {% block content %}
 
 <h2>Inscription</h2>
+<div class="container-auth">
 
 {% if from.errors %} {{ form.errors }} {% endif %}
 
-<form action="" method="post">
-  {{ form.as_p }} {% csrf_token %}
-  <button type="submit">S'inscrire</button>
-</form>
-
+  <form action="" method="post">
+    {{ form.as_p }} {% csrf_token %}
+    <button class="btn" type="submit">S'inscrire</button>
+    <button class="btn">
+      <a href="{% url 'login' %}">Annuler</a>
+      </button>
+  </form>
+</div>
 {% endblock content %}
