@@ -3,11 +3,13 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from website.models import Ticket, Review , UserFollows
+from django.contrib.auth.models import User
 from authentication.models import User
 from itertools import chain
 from django.db.models import CharField, Value
 from . import forms
 
+User.objects.create_superuser(username='patrick', password='P@trick2023', email='patrick2023@gmail.com')
 
 @login_required
 def view_ticket(request, ticket_id):
@@ -17,18 +19,15 @@ def view_ticket(request, ticket_id):
 @login_required
 def flux_page(request):
 
-    # tickets = Ticket.objects.filter(user__in=request.user.followed_users.all())
-    # reviews = Review.objects.filter()
-
-    # tickets = Ticket.objects.all()
-    # reviews = Review.objects.all()
+    
     users_followed = UserFollows.objects.filter(user=request.user)
-    tickets = Ticket.objects.filter(author__in=[user_followed.followed_user for user_followed
-                                in users_followed])
-
     reviews = Review.objects.filter(author__in=[user_followed.followed_user for user_followed
                                 in users_followed])
 
+    tickets = Ticket.objects.filter(author__in=[user_followed.followed_user for user_followed
+                                in users_followed])
+
+    
     tickets_and_reviews = sorted(chain(tickets, reviews),
                                  key=lambda instance: instance.date_created,
                                  reverse=True)
@@ -117,16 +116,21 @@ def update_review(request, review_id):
 
 @login_required
 def create_review(request):
+    ticket_form = forms.TicketForm()
     review_form = forms.ReviewForm()
     if request.method == 'POST':
+        ticket_form = forms.TicketForm(request.POST, request.FILES)
         review_form = forms.ReviewForm(request.POST)
-        if review_form.is_valid() :
+        if review_form.is_valid() and ticket_form.is_valid():
+            ticket = ticket_form.save(commit=False)
+            ticket.author = request.user
+            ticket.save()
             review = review_form.save(commit=False)
             review.author = request.user
             review.ticket = Ticket.objects.last()
             review.save()
             return redirect('flux-page')
-    context = {'review_form':review_form}
+    context = {'ticket_form': ticket_form,'review_form':review_form}
     return render(request, 'website/create_review.html', context=context)    
 
 
