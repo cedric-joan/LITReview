@@ -5,9 +5,11 @@
 <div class="grid-container">
   <div class="tickets">
     <form method="post" enctype="multipart/form-data">
+      {{ ticket_form.as_p }}
+      <hr>
       <h3>Critique</h3>
       {{ review_form.as_p }} {% csrf_token %}
-      <button type="submit">Envoyer</button>
+      <button class="btn" type="submit">Envoyer</button>
     </form>
   </div>
   {% endblock content%}
