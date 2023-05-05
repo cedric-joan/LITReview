@@ -6,13 +6,15 @@ Utiliser le rendu côté serveur dans Django.
 
 Cette application web permettra à une communauté d'utilisateurs de consulter ou de solliciter une critique de livres à la demande.
 
-# Front-end
-L'application présente deux cas d'utilisations principaux :
+# Fonctionnalités
 
-1 - Les personnes qui demandent des critiques surun livre ou sur un article particulier.
-
-2 - Les personnes qui recherchent des articles et des livres intéressants à lire, en se basant sur les critiques des autres.
-
+* Se connecter et s'inscrire.
+* Consulté un fil d'actulité des posts des utilisateurs auxquels on est abonné.
+* Créer des tickets (demande de critique sur un livre/article).
+* Créer des critiques, en réponse ou non à des tickets.
+* Filtrer sur les tickets ou critiques avec la possibilité de les modifier ou les supprimer.
+* Suivre d'autres utilisateurs, ou se désabonner.
+* Voir qui l'on suit et par qui l'on est suivi.
 
 # Tester le projet
 
@@ -52,5 +54,6 @@ Adresse administrateur:
 ```
 http://127.0.0.1:8000/admin
 ```
+Identifiant: patrick | Mot de passe : P@trick2023
 
 
