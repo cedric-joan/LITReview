@@ -9,7 +9,6 @@ from itertools import chain
 from django.db.models import CharField, Value
 from . import forms
 
-User.objects.create_superuser(username='patrick', password='P@trick2023', email='patrick2023@gmail.com')
 
 @login_required
 def view_ticket(request, ticket_id):
