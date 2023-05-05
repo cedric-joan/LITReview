@@ -1,6 +1,5 @@
-{% extends 'base.html'%} {% load flux_extras %} 
-{% load static %}
-{% block content %} 
+{% extends 'base.html'%} {% load flux_extras %} {% load static %} 
+{% block content %}
 <title>Page d'accueil</title>
 
 <h2>Flux</h2>
@@ -13,28 +12,34 @@
       <a href="{% url 'create_review' %}">Créer une critique</a>
     </button>
   </div>
+  {% if page_obj %}
   {% for instance in page_obj %} 
-    {% if instance|model_type == 'Ticket' %}
-      {% include 'website/partials/ticket_snippet.html' with ticket=instance %}
+    {% if instance|model_type == 'Ticket' %} 
+      {% include 'website/partials/ticket_snippet.html' with ticket=instance %} 
     {% elif instance|model_type == 'Review' %} 
-      {% include 'website/partials/review_snippet.html' with review=instance %}
-    {% endif %} 
+      {% include 'website/partials/review_snippet.html' with review=instance %} 
+    {% endif %}
   {% endfor %}
+  
 </div>
 <span class="paginator">
   {% if page_obj.has_previous %}
-      <a href="?page=1">« première</a> |
-      <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
+  <a href="?page=1">« première</a> |
+  <a href="?page={{ page_obj.previous_page_number }}">précédente</a>
   {% endif %}
-
+  
   <span>
-      Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
-
+    Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}.
   </span>
   {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">suivante</a> |
-
-      <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
+  <a href="?page={{ page_obj.next_page_number }}">suivante</a> |
+  
+  <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
   {% endif %}
 </span>
-{% endblock content %}
+{% else %}
+<h3 class="fil">Vous n'avez pas encore de fil littéraire.</h3>
+<h3 class="fil">Veuillez créer un ticket (demande de critique) ou publier une critique.</h3>
+{% endif %}
+
+{% endblock %}

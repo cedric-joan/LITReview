@@ -4,6 +4,7 @@
 <title>Posts</title>
 
 <h2>Posts</h2>
+{% if page_obj %}
 <div class="grid-container">
   {% for instance in page_obj %} 
     {% if instance|model_type == 'Ticket' %}
@@ -30,4 +31,7 @@
       <a href="?page={{ page_obj.paginator.num_pages }}">dernière</a>
   {% endif %}
 </span>
+{% else %}
+<h3 class="fil">Vous n'avez pas de Posts!</h3>
+{% endif %}
 {% endblock content %}
