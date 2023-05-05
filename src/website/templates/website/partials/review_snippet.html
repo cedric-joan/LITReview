@@ -21,4 +21,17 @@
     {% endif %}
   </div>
   <p></p>
+  
+  {% if instance.ticket.has_review %}
+  <div class="tickets">
+      <h4>{{ instance.ticket.title }}</h4>
+      <p>{{ instance.ticket.description }}</p>
+      {% if instance.ticket.image %}
+      <img src="{{ instance.ticket.image.url }}" />
+      {% else %}
+      <p></p>
+      {% endif %}
+      <p></p>
+    </div>
+    {% endif %}
 </div>

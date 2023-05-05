@@ -2,39 +2,44 @@
 
 <div class="tickets">
   <div class="header-ticket">
-    <p>{{ instance.author|upper }} a posté une critique.</p>
-    <p>Le {{ instance.date_created }}</p>
+    <p>{{ review.author|upper }} a posté une critique.</p>
+    <p>Le {{ review.date_created }}</p>
   </div>
-  <h4>{{ instance.title|upper }}</h4>
-  <p>{{ instance.comment }}</p>
+  <h4>{{ review.title|upper }}</h4>
+  <p>{{ review.comment }}</p>
   <div class="stars">
-    {% if instance.rating == 1 %}
+    {% if review.rating == 1 %}
     <i class="fas-stars">⭐</i>
-    {% elif instance.rating == 2 %}
+    {% elif review.rating == 2 %}
     <i class="fas-stars">⭐⭐</i>
-    {% elif instance.rating == 3 %}
+    {% elif review.rating == 3 %}
     <i class="fas-stars">⭐⭐⭐</i>
-    {% elif instance.rating == 4 %}
+    {% elif review.rating == 4 %}
     <i class="fas-stars">⭐⭐⭐⭐</i>
-    {% elif instance.rating == 5 %}
+    {% elif review.rating == 5 %}
     <i class="fas-stars">⭐⭐⭐⭐⭐</i>
     {% endif %}
   </div>
   <p></p>
   {% if instance.ticket %}
   <div class="tickets">
+    <div class="header-ticket">
+      <p>{{ instance.ticket.author|upper }}</p>
+      <p>{{ instance.ticket.date_created }}</p>
+    </div>
     <h4>{{ instance.ticket.title }}</h4>
     <p>{{ instance.ticket.description }}</p>
     {% if instance.ticket.image %}
     <img src="{{ instance.ticket.image.url }}" />
     {% else %}
-    <p>Aucune image</p>
+    <p></p>
     {% endif %}
     <p></p>
-    {% endif %} {% if request.user == instance.author %}
+  </div>
+  {% endif %}
+    {% if request.user == instance.author %}
     <button class="btn btn-critique">
       <a href="{% url 'update_review' instance.id %}">Modifier</a>
     </button>
     {% endif %}
-  </div>
 </div>
