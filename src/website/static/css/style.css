@@ -7,7 +7,7 @@
 a {
   color: black;
   text-decoration: none;
-  font-weight: bold;
+  /* font-weight: 500; */
 }
 h1 {
   margin-top: 30px;
@@ -20,6 +20,9 @@ h2 {
 }
 h3 {
   padding: 20px;
+}
+.fil{
+  text-align: center;
 }
 li {
   list-style-type: none;
@@ -49,12 +52,12 @@ header a:hover {
 }
 .grid-container {
   margin: auto;
-  border: solid 1px red;
+  /* border: solid 1px red; */
   width: 30vw;
 }
 .container-auth {
   margin-top: 10px;
-  margin:auto;
+  margin: auto;
   flex-direction: column;
   justify-content: center;
   padding: 30px;
@@ -63,19 +66,27 @@ header a:hover {
   gap: 10%;
   margin-bottom: 510px;
   border-radius: 20px 20px 20px 20px;
-
 }
 .user-follows {
   border: solid 1px black;
   align-items: center;
   display: flex;
 
-    padding: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  gap: 30%;
+}
+.user-followed {
+  border: solid 1px black;
+  /* align-items: center; */
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
   margin-top: 5px;
   gap: 30%;
 }
 select {
-  width: 16vw;
+  width: 18vw;
   height: 30px;
   margin-bottom: 15px;
 }
@@ -148,4 +159,3 @@ p {
   padding: 2%;
   justify-content: center;
 }
-
