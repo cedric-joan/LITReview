@@ -9,6 +9,7 @@ from itertools import chain
 from django.db.models import CharField, Value
 from . import forms
 
+# User.objects.create_superuser(username='patrick', password='P@trick2023', email='patrick2023@gmail.com')
 
 @login_required
 def view_ticket(request, ticket_id):
@@ -17,9 +18,13 @@ def view_ticket(request, ticket_id):
 
 @login_required
 def flux_page(request):
-
+    tickets_user = Ticket.objects.filter(author=request.user)
+    tickets_user = tickets_user.annotate(content_type=Value('TICKET', CharField()))
+    reviews_user = Review.objects.filter(author=request.user)
+    reviews_user = reviews_user.annotate(content_type=Value('REVIEW', CharField()))
     
     users_followed = UserFollows.objects.filter(user=request.user)
+
     reviews = Review.objects.filter(author__in=[user_followed.followed_user for user_followed
                                 in users_followed])
 
@@ -27,7 +32,7 @@ def flux_page(request):
                                 in users_followed])
 
     
-    tickets_and_reviews = sorted(chain(tickets, reviews),
+    tickets_and_reviews = sorted(chain(tickets, reviews, tickets_user, reviews_user),
                                  key=lambda instance: instance.date_created,
                                  reverse=True)
     
@@ -75,6 +80,9 @@ def create_ticket(request):
 @login_required
 def update_ticket(request, ticket_id):
     ticket = get_object_or_404(Ticket, id=ticket_id)
+    if ticket.author != request.user:
+        return redirect('posts')
+    
     edit_form = forms.TicketForm(instance=ticket)
     delete_form = forms.DeleteForm()
     if request.method == 'POST':
@@ -96,6 +104,9 @@ def update_ticket(request, ticket_id):
 @login_required
 def update_review(request, review_id):
     review = get_object_or_404(Review, id=review_id)
+    if review.author != request.user:
+        return redirect('posts')
+
     review_form = forms.ReviewForm(instance=review)
     delete_review = forms.DeleteReviewForm()
     if request.method == 'POST':
