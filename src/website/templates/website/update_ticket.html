@@ -1,11 +1,12 @@
-{% extends 'base.html'%}{% block content %}
+{% extends 'base.html'%}{% block content %} {% load static %}
 
+{% if ticket.author == request.user %}
 <h2>Modifier le ticket</h2>
 <div class="grid-container">
   <div class="tickets">
     <form method="post" enctype="multipart/form-data">
       {{ edit_form.as_p }} {% csrf_token %}
-      <button type="submit" class="btn">Sauvegarder</button>
+      <button  class="btn" type="submit">Sauvegarder</button>
     </form>
 
     <hr />
@@ -14,9 +15,9 @@
     <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
     <form action="" method="post">
       {{ delete_form }} {% csrf_token %}
-      <button type="submit" class="btn">Supprimer</button>
+      <button  class="btn" type="submit">Supprimer</button>
     </form>
   </div>
-
+{% endif %}
   {% endblock content %}
 </div>
