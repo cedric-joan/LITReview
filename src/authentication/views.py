@@ -1,26 +1,29 @@
 from django.contrib.auth import login, authenticate, logout
 
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from django.views.generic import View
 
 from . import forms
 
+
 def signup_page(request):
     form = forms.SignupForm()
-    if request.method =='POST':
-        form = forms.SignupForm(request.POST) 
+    if request.method == 'POST':
+        form = forms.SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request,user)
+            login(request, user)
             return redirect('flux-page')
     return render(request, "authentication/signup.html", context={'form': form})
-                
-# @login_required
+
+
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('login')
+
 
 class LoginPageView(View):
     template_name = "authentication/login.html"
@@ -44,7 +47,3 @@ class LoginPageView(View):
             else:
                 message = "Identifiants invalides."
         return render(request, self.template_name, context={"form": form, "message": message})
-    
-
-
-
